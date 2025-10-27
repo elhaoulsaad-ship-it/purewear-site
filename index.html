@@ -3,25 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Purewear - Site E-commerce Professionnel</title>
-    <!-- Bootstrap CSS pour un design professionnel -->
+    <title>Purewear - Montres de Luxe Professionnelles</title>
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body { font-family: Arial, sans-serif; background-color: #f8f9fa; }
-        .navbar { background-color: #343a40; }
-        .navbar-brand, .nav-link { color: white !important; }
-        .navbar-brand:hover, .nav-link:hover { color: #ddd !important; }
-        .product-card { margin-bottom: 20px; background: white; border-radius: 10px; padding: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .product-card img { max-height: 300px; object-fit: contain; }
+        body { font-family: 'Arial', sans-serif; background-color: #f8f9fa; color: #333; }
+        .navbar { background-color: #1a2a44; }
+        .navbar-brand, .nav-link { color: #fff !important; font-weight: 500; }
+        .navbar-brand:hover, .nav-link:hover { color: #e0e0e0 !important; }
+        .header { background: url('https://images.unsplash.com/photo-1505576399279-565b4e53de94?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') no-repeat center center; background-size: cover; color: #fff; padding: 100px 0; text-align: center; }
+        .product-card { background: #fff; border-radius: 10px; padding: 15px; margin-bottom: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); transition: transform 0.2s; }
+        .product-card:hover { transform: translateY(-5px); }
+        .product-card img { max-height: 250px; object-fit: contain; }
+        .section { padding: 30px 0; }
         .cart-item { margin-bottom: 10px; }
-        .section { display: none; padding: 20px; }
-        .section.active { display: block; }
-        .checkout-form { max-width: 500px; margin: 0 auto; }
+        .checkout-form { max-width: 500px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .secure-text { color: #28a745; font-weight: bold; font-size: 0.9em; }
+        .footer { background-color: #1a2a44; color: #fff; text-align: center; padding: 20px 0; margin-top: 40px; }
     </style>
 </head>
 <body>
 
-<!-- Navigation Bar -->
+<!-- Navigation -->
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
         <a class="navbar-brand" href="#" onclick="showSection('home')">Purewear</a>
@@ -29,7 +32,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav ms-auto">
                 <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('home')">Accueil</a></li>
                 <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('products')">Produits</a></li>
                 <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('cart')">Panier</a></li>
@@ -38,66 +41,87 @@
     </div>
 </nav>
 
+<!-- Header -->
+<div class="header">
+    <h1>Bienvenue chez Purewear</h1>
+    <p>Votre destination pour des montres de luxe et élégantes</p>
+    <button class="btn btn-light btn-lg mt-3" onclick="showSection('products')">Découvrir nos produits</button>
+</div>
+
 <!-- Sections -->
-<div class="container mt-5">
+<div class="container">
     <!-- Accueil -->
     <div id="home" class="section active">
-        <h1 class="text-center">Bienvenue sur Purewear</h1>
-        <p class="text-center">Découvrez notre collection exclusive de montres de luxe pour hommes, alliant style et qualité.</p>
-        <div class="text-center"><button class="btn btn-primary" onclick="showSection('products')">Voir les produits</button></div>
+        <h2 class="text-center mb-4">Pourquoi choisir Purewear ?</h2>
+        <p class="text-center">Nous proposons des montres de haute qualité, conçues pour les hommes d'affaires et les amateurs de style. Achetez en toute confiance avec notre service sécurisé.</p>
     </div>
 
     <!-- Produits -->
     <div id="products" class="section">
-        <h1 class="text-center">Nos Produits</h1>
+        <h2 class="text-center mb-4">Nos Montres</h2>
         <div class="row">
-            <div class="col-md-4 product-card">
-                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgDcpFu_-6gwjWLKjyX5cA87ATGmAbJjTUgzhghL76FCLI4gxvdNFbFRyv3xFSWXczL_PgBadHznOpupaHxts04wyNYMpuynGygWBpO3XBdUOqvdNdZUBacetM8cISwmY2kg4z03AvQKprJ_qxeWOJnMOJj5AWu9ga8AzBW-pZZuqSkZylcTIGYa1VibMo/s320/WhatsApp%20Image%202025-10-25%20at%2022.01.02%20(2).jpeg" alt="Montres d'affaires carrées" class="img-fluid">
-                <h3>Montres d'affaires carrées pour hommes, montre de luxe à Quartz avec bracelet en acier inoxydable et calendrier (sans boîte)</h3>
-                <p>Prix: 29.99 €</p>
-                <button class="btn btn-success" onclick="addToCart('Montres d\'affaires carrées', 29.99)">Ajouter au panier</button>
+            <div class="col-md-4">
+                <div class="product-card">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgDcpFu_-6gwjWLKjyX5cA87ATGmAbJjTUgzhghL76FCLI4gxvdNFbFRyv3xFSWXczL_PgBadHznOpupaHxts04wyNYMpuynGygWBpO3XBdUOqvdNdZUBacetM8cISwmY2kg4z03AvQKprJ_qxeWOJnMOJj5AWu9ga8AzBW-pZZuqSkZylcTIGYa1VibMo/s320/WhatsApp%20Image%202025-10-25%20at%2022.01.02%20(2).jpeg" alt="Montres d'affaires carrées" class="img-fluid mx-auto d-block">
+                    <h4>Montres d'affaires carrées pour hommes</h4>
+                    <p>Montre de luxe à Quartz, bracelet en acier inoxydable, avec calendrier (sans boîte)</p>
+                    <p class="text-success fw-bold">29,99 €</p>
+                    <button class="btn btn-success w-100" onclick="addToCart('Montres d\'affaires carrées', 29.99)">Ajouter au panier</button>
+                </div>
             </div>
-            <div class="col-md-4 product-card">
-                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhpV7eHMe5CYKxBRMYjoy9z-So_35g3Prrd1lZGaJi4AG1eDr9mFnr91DuSQA9QzbqyA20u8ePgxkOFX6zmXZBF8T_jo6SInA0XST8SmpbctLdGA0q_jhIvUrFNgk1nNDwwVXwUqarCe2blIi8rI6E16Ys3s5BQvgO3tyrzcVqB8okz-JdAwvmu0KJSQUc/s320/WhatsApp%20Image%202025-10-10-25%20at%2022.01.02%20(1).jpeg" alt="UTHAI montre pour hommes" class="img-fluid">
-                <h3>UTHAI montre pour hommes à la mode, lumière luxe, montres à Quartz étanche romain creux</h3>
-                <p>Prix: 27.99 €</p>
-                <button class="btn btn-success" onclick="addToCart('UTHAI montre pour hommes', 27.99)">Ajouter au panier</button>
+            <div class="col-md-4">
+                <div class="product-card">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhpV7eHMe5CYKxBRMYjoy9z-So_35g3Prrd1lZGaJi4AG1eDr9mFnr91DuSQA9QzbqyA20u8ePgxkOFX6zmXZBF8T_jo6SInA0XST8SmpbctLdGA0q_jhIvUrFNgk1nNDwwVXwUqarCe2blIi8rI6E16Ys3s5BQvgO3tyrzcVqB8okz-JdAwvmu0KJSQUc/s320/WhatsApp%20Image%202025-10-25%20at%2022.01.02%20(1).jpeg" alt="UTHAI montre pour hommes" class="img-fluid mx-auto d-block">
+                    <h4>UTHAI Montre pour Hommes</h4>
+                    <p>À la mode, lumière luxe, montres à Quartz étanche romain creux</p>
+                    <p class="text-success fw-bold">27,99 €</p>
+                    <button class="btn btn-success w-100" onclick="addToCart('UTHAI Montre', 27.99)">Ajouter au panier</button>
+                </div>
             </div>
-            <div class="col-md-4 product-card">
-                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiEVyV5XkWQfgrpPXyPcvMX5C19cauXCPloKHh86aRxvQk6vWMidLOifr-BKhhuVRc3e2b4BK6vFiBxH-rd361QAiYXFGT1OGcvSyu9z4xKoju-nFma3-uOWrKEt-YQOny6FhxBeR7g9Uk60By-md66RPTJL4dizGRbO8NGTaNRLETdPiIhB7zUDzRRtbM/s320/WhatsApp%20Image%202025-10-25%20at%2022.01.02.jpeg" alt="Ensemble DEYROS mode hommes" class="img-fluid">
-                <h3>5 pièces ensemble DEYROS mode hommes, calendrier, montres en acier inoxydable Quartz</h3>
-                <p>Prix: 25.99 €</p>
-                <button class="btn btn-success" onclick="addToCart('Ensemble DEYROS mode hommes', 25.99)">Ajouter au panier</button>
+            <div class="col-md-4">
+                <div class="product-card">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiEVyV5XkWQfgrpPXyPcvMX5C19cauXCPloKHh86aRxvQk6vWMidLOifr-BKhhuVRc3e2b4BK6vFiBxH-rd361QAiYXFGT1OGcvSyu9z4xKoju-nFma3-uOWrKEt-YQOny6FhxBeR7g9Uk60By-md66RPTJL4dizGRbO8NGTaNRLETdPiIhB7zUDzRRtbM/s320/WhatsApp%20Image%202025-10-25%20at%2022.01.02.jpeg" alt="Ensemble DEYROS" class="img-fluid mx-auto d-block">
+                    <h4>Ensemble DEYROS 5 pièces</h4>
+                    <p>Mode hommes, calendrier, montres en acier inoxydable Quartz</p>
+                    <p class="text-success fw-bold">28,99 €</p>
+                    <button class="btn btn-success w-100" onclick="addToCart('Ensemble DEYROS', 28.99)">Ajouter au panier</button>
+                </div>
             </div>
-            <div class="col-md-4 product-card">
-                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgTJ8RB-cZ3ru-XBB4U20qPPDfWlK7H-ysHeOXtWjHVaJSXXVV-2xa6ykdhCVqyoLTM5Hl9ktdvZN-JRb3RWX_2jtTWxvYxaMWGPHVT5lNlfrLZ1MD-M1UoU0BLICOKtkQMGJG8_nMfHmskq6z0WZ4A1uisRiQb7pC_pyQFUZ7mj8uoaf7t9w7w5FPQ/s320/y.jpeg" alt="Montre étanche de luxe" class="img-fluid">
-                <h3>Montre étanche de luxe pour hommes, Date, calendrier, montre à Quartz, mode Business</h3>
-                <p>Prix: 28.99 €</p>
-                <button class="btn btn-success" onclick="addToCart('Montre étanche de luxe', 28.99)">Ajouter au panier</button>
+            <div class="col-md-4">
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/250?text=Montre+Étanche+de+Luxe" alt="Montre étanche de luxe" class="img-fluid mx-auto d-block">
+                    <h4>Montre Étanche de Luxe</h4>
+                    <p>Date, calendrier, montre à Quartz, mode Business</p>
+                    <p class="text-success fw-bold">25,99 €</p>
+                    <button class="btn btn-success w-100" onclick="addToCart('Montre Étanche', 25.99)">Ajouter au panier</button>
+                </div>
             </div>
-            <div class="col-md-4 product-card">
-                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgfjQaiWB2qr3TRl6h_sjuhMIRzi-V_Qr3DCsw0RvBds5UohlOxzIIzW97mqx4BAF4fhpAbibW3Ge4PVcRcdqGelpStVkUiXffQPhSVYIUsn5acBakQO6cHVQ7xVrm6YUoiOh2azyjSXG3srj1TOk5NL_IYg0SlMuJ-Iujy0LVZ9y_WRmwHR39Jzh51icM/s320" alt="Montre de sport 2025" class="img-fluid">
-                <h3>2025 nouvelle montre de sport créative, Design décontracté, montres à Quartz étanches</h3>
-                <p>Prix: 19.99 €</p>
-                <button class="btn btn-success" onclick="addToCart('Montre de sport 2025', 19.99)">Ajouter au panier</button>
+            <div class="col-md-4">
+                <div class="product-card">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgfjQaiWB2qr3TRl6h_sjuhMIRzi-V_Qr3DCsw0RvBds5UohlOxzIIzW97mqx4BAF4fhpAbibW3Ge4PVcRcdqGelpStVkUiXffQPhSVYIUsn5acBakQO6cHVQ7xVrm6YUoiOh2azyjSXG3srj1TOk5NL_IYg0SlMuJ-Iujy0LVZ9y_WRmwHR39Jzh51icM/s320/e5d8b888-1e9a-4f45-8543-d408a7fa26ce.jpeg" alt="Montre de sport 2025" class="img-fluid mx-auto d-block">
+                    <h4>Montre de Sport 2025</h4>
+                    <p>Créative, design décontracté, montres à Quartz étanches</p>
+                    <p class="text-success fw-bold">20,99 €</p>
+                    <button class="btn btn-success w-100" onclick="addToCart('Montre de Sport 2025', 20.99)">Ajouter au panier</button>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Panier -->
     <div id="cart" class="section">
-        <h1 class="text-center">Votre Panier</h1>
-        <div id="cart-items"></div>
-        <h3 class="text-center">Total: <span id="total">0 €</span></h3>
-        <div class="text-center"><button class="btn btn-primary" onclick="showSection('checkout')">Procéder au paiement</button></div>
+        <h2 class="text-center mb-4">Votre Panier</h2>
+        <div id="cart-items" class="mb-4"></div>
+        <h4 class="text-center">Total: <span id="total">0 €</span></h4>
+        <div class="text-center"><button class="btn btn-primary btn-lg" onclick="showSection('checkout')">Procéder au paiement</button></div>
     </div>
 
     <!-- Paiement -->
     <div id="checkout" class="section">
-        <h1 class="text-center">Finaliser votre commande</h1>
-        <div id="cart-items-checkout"></div>
-        <h3 class="text-center">Total: <span id="total-checkout">0 €</span></h3>
-        <form class="checkout-form mt-4">
+        <h2 class="text-center mb-4">Finaliser votre commande</h2>
+        <div id="cart-items-checkout" class="mb-4"></div>
+        <h4 class="text-center">Total: <span id="total-checkout">0 €</span></h4>
+        <form class="checkout-form">
             <div class="mb-3">
                 <label for="name" class="form-label">Nom</label>
                 <input type="text" class="form-control" id="name" required>
@@ -110,70 +134,67 @@
                 <label for="phone" class="form-label">Téléphone</label>
                 <input type="tel" class="form-control" id="phone" required>
             </div>
-            <button type="button" class="btn btn-primary w-100" onclick="submitOrder()">Payer via WhatsApp</button>
+            <button type="button" class="btn btn-success w-100 mb-2" onclick="submitOrder()">Payer via WhatsApp</button>
+            <p class="secure-text text-center">Paiement 100% sécurisé</p>
         </form>
     </div>
 </div>
+
+<!-- Footer -->
+<footer class="footer">
+    <p>&copy; 2025 Purewear. Tous droits réservés. | <a href="#" style="color: #fff;">Contactez-nous</a> | <a href="#" style="color: #fff;">Politique de confidentialité</a></p>
+</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     // Gestion des sections
     function showSection(sectionId) {
-        document.querySelectorAll('.section').forEach(section => {
-            section.classList.remove('active');
-        });
+        document.querySelectorAll('.section').forEach(section => section.classList.remove('active'));
         document.getElementById(sectionId).classList.add('active');
-        if (sectionId === 'cart' || sectionId === 'checkout') {
-            displayCart();
-        }
+        if (sectionId === 'cart' || sectionId === 'checkout') displayCart();
     }
 
-    // Gestion du panier avec localStorage
+    // Gestion du panier
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
-
     function addToCart(productName, price) {
         const existingItem = cart.find(item => item.name === productName);
-        if (existingItem) {
-            existingItem.quantity += 1;
-        } else {
-            cart.push({ name: productName, price: price, quantity: 1 });
-        }
+        if (existingItem) existingItem.quantity += 1;
+        else cart.push({ name: productName, price, quantity: 1 });
         localStorage.setItem('cart', JSON.stringify(cart));
         alert(`${productName} ajouté au panier !`);
         displayCart();
     }
 
     function displayCart() {
-        const cartContainers = [document.getElementById('cart-items'), document.getElementById('cart-items-checkout')];
+        const containers = [document.getElementById('cart-items'), document.getElementById('cart-items-checkout')];
         let total = 0;
-        cartContainers.forEach(container => {
+        containers.forEach(container => {
             if (container) {
                 container.innerHTML = '';
                 cart.forEach(item => {
-                    const itemDiv = document.createElement('div');
-                    itemDiv.classList.add('cart-item');
-                    itemDiv.innerHTML = `${item.name} - Quantité: ${item.quantity} - Prix: ${item.price * item.quantity} €`;
-                    container.appendChild(itemDiv);
+                    const div = document.createElement('div');
+                    div.classList.add('cart-item');
+                    div.textContent = `${item.name} - Quantité: ${item.quantity} - ${item.price * item.quantity} €`;
+                    container.appendChild(div);
                     total += item.price * item.quantity;
                 });
             }
         });
-        const totalElements = [document.getElementById('total'), document.getElementById('total-checkout')];
-        totalElements.forEach(totalElement => {
-            if (totalElement) totalElement.innerText = total + ' €';
+        ['total', 'total-checkout'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.textContent = total + ' €';
         });
     }
 
+    // Soumission de la commande
     function submitOrder() {
         const name = document.getElementById('name').value;
         const address = document.getElementById('address').value;
         const phone = document.getElementById('phone').value;
-
         if (!name || !address || !phone) {
             alert('Veuillez remplir tous les champs.');
             return;
         }
-
         let orderDetails = `Commande de ${name}\nAdresse: ${address}\nTéléphone: ${phone}\nProduits:\n`;
         let total = 0;
         cart.forEach(item => {
@@ -181,22 +202,16 @@
             total += item.price * item.quantity;
         });
         orderDetails += `Total: ${total} €`;
-
-        // Redirection vers WhatsApp pour paiement
         const whatsappUrl = `https://wa.me/0665290743?text=${encodeURIComponent(orderDetails)}`;
-        window.open(whatsappUrl, '_blank');
-
-        // Envoi d'email via mailto (placeholder, non sécurisé)
+        window.location.href = whatsappUrl; // Redirection directe
         const emailBody = encodeURIComponent(orderDetails);
         window.location.href = `mailto:saadelhaoul0@gmail.com?subject=Confirmation de Commande&body=${emailBody}`;
-
-        // Vider le panier après commande
         localStorage.removeItem('cart');
-        alert('Commande envoyée ! Merci.');
+        alert('Commande envoyée avec succès !');
         showSection('home');
     }
 
-    // Afficher le panier au chargement si sur la section panier ou paiement
+    // Affichage initial du panier si nécessaire
     if (document.getElementById('cart').classList.contains('active') || document.getElementById('checkout').classList.contains('active')) {
         displayCart();
     }
