@@ -25,6 +25,9 @@
         .btn-custom { background-color: #3498db; color: #fff; border: none; transition: background-color 0.3s; }
         .btn-custom:hover { background-color: #2980b9; }
         .welcome-text { font-size: 1.2em; margin-bottom: 20px; }
+        .clear-cart-btn { background-color: #e74c3c; color: #fff; border: none; padding: 5px 10px; border-radius: 5px; transition: background-color 0.3s; }
+        .clear-cart-btn:hover { background-color: #c0392b; }
+        .whatsapp-link { color: #27ae60; text-decoration: underline; }
     </style>
 </head>
 <body>
@@ -49,7 +52,7 @@
 <!-- Header -->
 <div class="header">
     <h1>Bienvenue chez Purewear</h1>
-    <p class="welcome-text">Bonsoir ! Il est 22:06, découvrez nos montres de luxe aujourd'hui.</p>
+    <p class="welcome-text">Bonsoir ! Il est 22:18, découvrez nos montres de luxe aujourd'hui.</p>
     <button class="btn btn-custom btn-lg mt-3" onclick="showSection('products')">Explorer nos collections</button>
 </div>
 
@@ -118,6 +121,7 @@
         <h2 class="text-center mb-4">Votre Panier</h2>
         <div id="cart-items" class="mb-4"></div>
         <h4 class="text-center">Total: <span id="total">0 €</span></h4>
+        <div class="text-center mb-3"><button class="clear-cart-btn" onclick="clearCart()">Vider le panier</button></div>
         <div class="text-center"><button class="btn btn-custom btn-lg" onclick="showSection('checkout')">Procéder au paiement</button></div>
     </div>
 
@@ -126,6 +130,7 @@
         <h2 class="text-center mb-4">Finaliser votre commande</h2>
         <div id="cart-items-checkout" class="mb-4"></div>
         <h4 class="text-center">Total: <span id="total-checkout">0 €</span></h4>
+        <div class="text-center mb-3"><button class="clear-cart-btn" onclick="clearCart()">Vider le panier</button></div>
         <form class="checkout-form">
             <div class="mb-3">
                 <label for="name" class="form-label">Nom</label>
@@ -141,6 +146,7 @@
             </div>
             <button type="button" class="btn btn-success w-100 mb-2" onclick="submitOrder()">Payer via WhatsApp</button>
             <p class="secure-text text-center">Paiement 100% sécurisé et confidentiel</p>
+            <p class="text-center">Si la redirection échoue, <a href="#" class="whatsapp-link" onclick="openWhatsAppManually(); return false;">cliquez ici pour ouvrir WhatsApp</a>.</p>
         </form>
     </div>
 </div>
@@ -160,7 +166,7 @@
     }
 
     // Gestion du panier
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
     function addToCart(productName, price) {
         const existingItem = cart.find(item => item.name === productName);
         if (existingItem) existingItem.quantity += 1;
@@ -180,6 +186,17 @@
         }
     }
 
+    function clearCart() {
+        if (cart.length > 0) {
+            cart = [];
+            localStorage.removeItem('cart');
+            alert('Le panier a été vidé avec succès !');
+            displayCart();
+        } else {
+            alert('Le panier est déjà vide !');
+        }
+    }
+
     function displayCart() {
         const containers = [document.getElementById('cart-items'), document.getElementById('cart-items-checkout')];
         let total = 0;
@@ -191,7 +208,7 @@
                     div.classList.add('cart-item');
                     div.innerHTML = `
                         <span>${item.name} - Quantité: ${item.quantity} - ${item.price * item.quantity} €</span>
-                        <button class="delete-btn" onclick="removeFromCart('${item.name}')">Supprimer</button>
+                        <button class="delete-btn" onclick="removeFromCart('${item.name.replace(/'/g, "\\'")}')">Supprimer</button>
                     `;
                     container.appendChild(div);
                     total += item.price * item.quantity;
@@ -219,14 +236,43 @@
             orderDetails += `${item.name} x${item.quantity} - ${item.price * item.quantity} €\n`;
             total += item.price * item.quantity;
         });
-        orderDetails += `Total: ${total} €\nDate: 27/10/2025 22:06`;
+        orderDetails += `Total: ${total} €\nDate: ${new Date().toLocaleString('fr-FR', { timeZone: 'Europe/Paris' })}`;
         const whatsappUrl = `https://wa.me/0665290743?text=${encodeURIComponent(orderDetails)}`;
-        window.location.href = whatsappUrl;
+        try {
+            window.location.href = whatsappUrl;
+            setTimeout(() => {
+                if (document.location.href === whatsappUrl) {
+                    alert('Redirection échouée. Utilisez le lien manuel ci-dessous.');
+                }
+            }, 1000);
+        } catch (e) {
+            alert('Redirection automatique échouée. Utilisez le lien manuel ci-dessous.');
+        }
         const emailBody = encodeURIComponent(orderDetails);
         window.location.href = `mailto:saadelhaoul0@gmail.com?subject=Confirmation de Commande&body=${emailBody}`;
         localStorage.removeItem('cart');
         alert('Commande envoyée avec succès ! Merci.');
         showSection('home');
+    }
+
+    // Lien manuel pour WhatsApp
+    function openWhatsAppManually() {
+        const name = document.getElementById('name').value;
+        const address = document.getElementById('address').value;
+        const phone = document.getElementById('phone').value;
+        if (!name || !address || !phone) {
+            alert('Veuillez remplir tous les champs avant de continuer.');
+            return;
+        }
+        let orderDetails = `Commande de ${name}\nAdresse: ${address}\nTéléphone: ${phone}\nProduits:\n`;
+        let total = 0;
+        cart.forEach(item => {
+            orderDetails += `${item.name} x${item.quantity} - ${item.price * item.quantity} €\n`;
+            total += item.price * item.quantity;
+        });
+        orderDetails += `Total: ${total} €\nDate: ${new Date().toLocaleString('fr-FR', { timeZone: 'Europe/Paris' })}`;
+        const whatsappUrl = `https://wa.me/0665290743?text=${encodeURIComponent(orderDetails)}`;
+        window.open(whatsappUrl, '_blank');
     }
 
     // Affichage initial du panier si nécessaire
