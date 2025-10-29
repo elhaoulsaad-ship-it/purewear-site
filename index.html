@@ -3,100 +3,162 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TargetRythm | Machine de Boxe Musicale Intelligente - 349 DH</title>
+    <title>TargetRythm - Machine de Boxe Musicale</title>
     <style>
-        /* Styles de base (CSS) */
+        /* --- CSS Globales et Structure --- */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f4f4f4;
             color: #333;
+            line-height: 1.6;
         }
-        header {
-            background-color: #e60000; /* Rouge vif pour l'énergie */
+        .header {
+            background-color: #333;
             color: white;
             padding: 15px 20px;
             text-align: center;
-            font-size: 24px;
-            font-weight: bold;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .container {
-            max-width: 600px; /* LARGEUR COMPACTE demandée */
-            margin: 20px auto;
-            padding: 20px;
-            background-color: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
-        /* Styles de la Page Produit */
-        #product-page {
-            display: block; /* Affiché par défaut */
-            text-align: center;
-        }
-        #product-page img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            border: 1px solid #ddd;
-        }
-        .price {
-            font-size: 36px;
-            color: #e60000;
-            font-weight: bold;
-            margin: 10px 0;
-        }
-        .description {
-            text-align: left;
-            margin: 20px 0;
-            padding: 0 15px;
-            line-height: 1.6;
-        }
-        .btn-primary {
-            background-color: #e60000;
-            color: white;
-            padding: 15px 30px;
-            text-decoration: none;
-            border: none;
-            border-radius: 5px;
-            font-size: 18px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .btn-primary:hover {
-            background-color: #cc0000;
-        }
-
-        /* Styles du Panier */
-        #cart-page {
-            display: none; /* Caché par défaut */
-            padding-top: 20px;
-        }
-        #cart-page h2 {
-            border-bottom: 2px solid #e60000;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
-        .cart-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 15px;
-            margin-bottom: 15px;
         }
-        .cart-item-details {
-            flex-grow: 1;
+        .header h1 {
+            margin: 0;
+            font-size: 1.5em;
         }
-        .cart-item-price {
+        .header .cart-button {
+            background-color: #d9534f;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
             font-weight: bold;
-            color: #e60000;
+            transition: background-color 0.3s;
         }
+        .header .cart-button:hover {
+            background-color: #c9302c;
+        }
+
+        /* --- Page Produit (Index) --- */
+        .product-page {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+        .product-detail {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        .product-image {
+            flex: 1 1 40%;
+            text-align: center;
+        }
+        .product-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .product-info {
+            flex: 1 1 50%;
+        }
+        .product-info h2 {
+            color: #5cb85c;
+            margin-top: 0;
+        }
+        .product-info .price {
+            font-size: 2.5em;
+            color: #d9534f;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+        .add-to-cart-btn {
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2em;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+        .add-to-cart-btn:hover {
+            background-color: #449d44;
+        }
+
+        /* --- Panier (Modale/Section) --- */
+        .cart-modal {
+            display: none; /* Caché par défaut */
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+            padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 30px;
+            border: 1px solid #888;
+            width: 90%;
+            max-width: 600px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            animation-name: animatetop;
+            animation-duration: 0.4s;
+        }
+        @keyframes animatetop {
+            from {top: -300px; opacity: 0}
+            to {top: 0; opacity: 1}
+        }
+        .close-btn {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close-btn:hover, .close-btn:focus {
+            color: #000;
+            text-decoration: none;
+        }
+
+        /* --- Liste des Produits dans le Panier --- */
+        #cart-items {
+            list-style: none;
+            padding: 0;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 20px;
+        }
+        #cart-items li {
+            padding: 10px 0;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+        }
+        .cart-total {
+            font-size: 1.5em;
+            font-weight: bold;
+            text-align: right;
+            margin-top: 10px;
+            color: #d9534f;
+        }
+
+        /* --- Formulaire de Commande --- */
         .form-group {
             margin-bottom: 15px;
-            text-align: left;
         }
         .form-group label {
             display: block;
@@ -108,154 +170,267 @@
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
-            box-sizing: border-box; 
+            box-sizing: border-box;
         }
-        .payment-info {
-            background-color: #fff3cd;
-            color: #856404;
-            border: 1px solid #ffeeba;
+        
+        /* --- Bouton WhatsApp (Paiement) --- */
+        #whatsapp-pay-btn {
+            width: 100%;
             padding: 15px;
-            border-radius: 4px;
             margin-top: 20px;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: background-color 0.3s, opacity 0.3s;
+            cursor: pointer;
+        }
+        /* Style pour le bouton activé */
+        #whatsapp-pay-btn:not(:disabled) {
+            background-color: #5cb85c; /* Vert vif */
+        }
+        /* Style pour le bouton désactivé (par défaut) */
+        #whatsapp-pay-btn:disabled {
+            background-color: #a0d4a0; /* Vert pâle, désactivé */
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        
+        /* --- Message de Succès/Erreur --- */
+        #message-container {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
             text-align: center;
         }
-        .whatsapp-btn {
-            background-color: #25D366; /* Couleur WhatsApp */
-            color: white;
-            padding: 15px 30px;
-            text-decoration: none;
-            border: none;
-            border-radius: 5px;
-            font-size: 18px;
-            cursor: pointer;
-            margin-top: 20px;
-            width: 100%;
-            display: block;
-            transition: background-color 0.3s;
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
         }
-        .whatsapp-btn:hover {
-            background-color: #1FAF59;
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        TARGETRYTHM
-    </header>
+    <div class="header">
+        <h1>TargetRythm</h1>
+        <button class="cart-button" onclick="openCart()">
+            🛒 Panier (<span id="cart-count">0</span>)
+        </button>
+    </div>
 
-    <div class="container">
+    <div class="product-page">
+        <div class="product-detail">
+            <div class="product-image">
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEinC2FrtorGb8sePuZIr1FML8jGhtjwSoPai-wwPcp_INvbV3enSfum_GQwo-AWRWZYKXqxWuNy281SKuqTDgo3sk9dmQbo2OcG7WekCP8xLqmuSlPboXtC59-Q76KTlByGDqqUXjzA-0PmiT8x0hRcXuRubIhUdX74UyS5ojp_mFCrBodmXrs_vn3Ckrk/s1295/IMG_0659.jpeg" alt="Machine de Boxe Musicale Intelligente">
+            </div>
+            <div class="product-info">
+                <h2>Machine de Boxe Musicale Intelligente</h2>
+                <p>Machine de boxe musicale pour pratique de réaction, cible murale intelligente, vitesse réglable, Compatible Bluetooth pour enfants et adultes.</p>
+                
+                <div class="price">349 DH</div>
 
-        <section id="product-page">
-            <h1>Machine de Boxe Musicale Intelligente</h1>
+                <button class="add-to-cart-btn" onclick="addToCart({id: 1, name: 'Machine de Boxe Musicale Intelligente', price: 349.00, qty: 1})">
+                    ➕ Ajouter au Panier
+                </button>
+            </div>
+        </div>
+    </div>
 
-            <img src=https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEinC2FrtorGb8sePuZIr1FML8jGhtjwSoPai-wwPcp_INvbV3enSfum_GQwo-AWRWZYKXqxWuNy281SKuqTDgo3sk9dmQbo2OcG7WekCP8xLqmuSlPboXtC59-Q76KTlByGDqqUXjzA-0PmiT8x0hRcXuRubIhUdX74UyS5ojp_mFCrBodmXrs_vn3Ckrk/s1295/IMG_0659.jpeg alt="Machine de Boxe Musicale TargetRythm">
-
-            <p class="description">
-                **Description :** Machine de boxe musicale pour pratique de réaction, cible murale intelligente, vitesse réglable, compatible Bluetooth pour enfants et adultes. Une nouvelle façon amusante et efficace d'améliorer votre coordination et votre cardio à la maison !
-            </p>
-
-            <div class="price">349 DH</div>
-
-            <button class="btn-primary" onclick="addToCart()">
-                AJOUTER AU PANIER
-            </button>
-        </section>
-
-        <section id="cart-page">
+    <div id="cartModal" class="cart-modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeCart()">&times;</span>
             <h2>🛒 Votre Panier</h2>
+            
+            <ul id="cart-items">
+                </ul>
+            
+            <div class="cart-total">Total : <span id="cart-total-price">0.00</span> DH</div>
 
-            <div class="cart-item">
-                <div class="cart-item-details">
-                    **Machine de Boxe Musicale Intelligente** (x1)
+            <h3>Détails pour la Commande</h3>
+            <form id="checkoutForm">
+                <div class="form-group">
+                    <label for="client-name">Nom et Prénom :</label>
+                    <input type="text" id="client-name" required>
                 </div>
-                <div class="cart-item-price">
-                    349 DH
+                <div class="form-group">
+                    <label for="client-tel">Numéro de Téléphone :</label>
+                    <input type="text" id="client-tel" required value="0665290743" readonly>
                 </div>
-            </div>
-
-            <h3>Détails de la Commande</h3>
-            <div class="form-group">
-                <label for="fullName">Nom et Prénom :</label>
-                <input type="text" id="fullName" required>
-            </div>
-            <div class="form-group">
-                <label for="phone">Numéro de Téléphone (pour contact) :</label>
-                <input type="tel" id="phone" required>
-            </div>
-            <div class="form-group">
-                <label for="address">Adresse de Livraison Complète (Ville, Rue, Code Postal) :</label>
-                <input type="text" id="address" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Adresse E-mail (pour confirmation) :</label>
-                <input type="email" id="email" required>
-            </div>
-
-            <div class="payment-info">
-                **Mode de Paiement :** Vous serez redirigé vers WhatsApp pour finaliser votre commande avec un agent. Le paiement s'effectuera selon les modalités convenues.
-            </div>
-
-            <button class="whatsapp-btn" onclick="sendToWhatsApp()">
-                PASSER LA COMMANDE VIA WHATSAPP
-            </button>
-        </section>
-
+                <div class="form-group">
+                    <label for="client-address">Adresse de Livraison :</label>
+                    <input type="text" id="client-address" required>
+                </div>
+                <div class="form-group">
+                    <label for="client-email">Adresse E-Mail (Confirmation) :</label>
+                    <input type="email" id="client-email" required value="saadelhaoul0@gmail.com" readonly>
+                </div>
+                
+                <button type="submit" id="whatsapp-pay-btn" disabled>
+                    PASSER LA COMMANDE & PAYER VIA WHATSAPP
+                </button>
+            </form>
+            
+            <div id="message-container"></div>
+        </div>
     </div>
 
     <script>
-        // Variables globales pour le produit et le numéro WhatsApp
-        const PRODUCT_NAME = "Machine de Boxe Musicale Intelligente";
-        const PRODUCT_PRICE = 349; // DH
-        const WHATSAPP_NUMBER = "212665290743"; // Votre numéro 0665290743 en format international
+        // --- JAVASCRIPT ---
 
-        // Fonction pour afficher la page Panier et masquer la page Produit
-        function addToCart() {
-            document.getElementById('product-page').style.display = 'none';
-            document.getElementById('cart-page').style.display = 'block';
-            window.scrollTo(0, 0); // Remonter en haut de page
+        const WHATSAPP_NUMBER = '212665290743'; // Votre numéro WhatsApp (avec le code pays)
+        const YOUR_EMAIL = 'saadelhaoul0@gmail.com'; // Votre email pour confirmation
+
+        // Initialisation du Panier (Stockage Local)
+        let cart = JSON.parse(localStorage.getItem('targetrythm_cart')) || [];
+
+        // Fonction pour mettre à jour l'affichage du panier (icône)
+        function updateCartCount() {
+            const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+            document.getElementById('cart-count').textContent = totalQty;
         }
 
-        // Fonction pour générer le lien WhatsApp avec les données de la commande
-        function sendToWhatsApp() {
-            const fullName = document.getElementById('fullName').value;
-            const phone = document.getElementById('phone').value;
-            const address = document.getElementById('address').value;
-            const email = document.getElementById('email').value;
-            
-            // Vérification simple des champs
-            if (!fullName || !phone || !address || !email) {
-                alert("Veuillez remplir tous les champs obligatoires avant de commander.");
-                return;
+        // Fonction d'ajout de produit au panier
+        function addToCart(product) {
+            const existingItem = cart.find(item => item.id === product.id);
+
+            if (existingItem) {
+                existingItem.qty += product.qty;
+            } else {
+                cart.push(product);
             }
 
-            // Création du message de commande
-            const message = `*COMMANDE TARGETRYTHM*
-
-Bonjour, je souhaite commander :
-- Produit: ${PRODUCT_NAME} (x1)
-- Prix total: ${PRODUCT_PRICE} DH
-
-*Mes coordonnées :*
-- Nom: ${fullName}
-- Téléphone: ${phone}
-- Adresse: ${address}
-- Email: ${email}
-
-Veuillez confirmer ma commande. Merci.`;
-
-            // Encodage du message pour l'URL
-            const encodedMessage = encodeURIComponent(message);
-
-            // CORRECTION FINALE WHATSAPP POUR IOS : Utilisation du schéma "whatsapp://"
-            const whatsappLink = `whatsapp://send?phone=${WHATSAPP_NUMBER}&text=${encodedMessage}`;
-
-            // Redirection
-            window.open(whatsappLink, '_blank');
-            
-            alert("Votre commande a été transmise ! L'application WhatsApp devrait s'ouvrir directement.");
+            localStorage.setItem('targetrythm_cart', JSON.stringify(cart));
+            updateCartCount();
+            openCart(); // Ouvre le panier après l'ajout
         }
-    </script>
 
+        // Fonction pour afficher le contenu du panier dans la modal
+        function renderCart() {
+            const cartList = document.getElementById('cart-items');
+            const totalElement = document.getElementById('cart-total-price');
+            cartList.innerHTML = '';
+            let total = 0;
+
+            if (cart.length === 0) {
+                cartList.innerHTML = '<li>Votre panier est vide.</li>';
+                total = 0;
+            } else {
+                cart.forEach(item => {
+                    const lineTotal = item.price * item.qty;
+                    total += lineTotal;
+                    
+                    const li = document.createElement('li');
+                    li.innerHTML = `
+                        <span>${item.name} (x${item.qty})</span>
+                        <span>${lineTotal.toFixed(2)} DH</span>
+                    `;
+                    cartList.appendChild(li);
+                });
+            }
+
+            totalElement.textContent = total.toFixed(2);
+        }
+
+        // Fonctions d'ouverture/fermeture de la modal
+        function openCart() {
+            renderCart();
+            document.getElementById('cartModal').style.display = 'block';
+        }
+
+        function closeCart() {
+            document.getElementById('cartModal').style.display = 'none';
+        }
+
+        // --- Logique du Formulaire et Paiement WhatsApp ---
+
+        const checkoutForm = document.getElementById('checkoutForm');
+        const whatsappBtn = document.getElementById('whatsapp-pay-btn');
+        const messageContainer = document.getElementById('message-container');
+        const formInputs = checkoutForm.querySelectorAll('input[required]');
+
+        // 1. Validation du formulaire pour activer le bouton
+        function checkFormValidity() {
+            let allFilled = true;
+            formInputs.forEach(input => {
+                if (input.value.trim() === '') {
+                    allFilled = false;
+                }
+            });
+            whatsappBtn.disabled = !allFilled || cart.length === 0; // Désactivé si vide ou si panier vide
+        }
+        
+        formInputs.forEach(input => {
+            input.addEventListener('input', checkFormValidity);
+        });
+
+        // 2. Gestion de la soumission du formulaire
+        checkoutForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            if (whatsappBtn.disabled) return;
+            
+            // Récupération des données client
+            const clientName = document.getElementById('client-name').value;
+            const clientTel = document.getElementById('client-tel').value;
+            const clientAddress = document.getElementById('client-address').value;
+            const clientEmail = document.getElementById('client-email').value;
+            const total = document.getElementById('cart-total-price').textContent;
+
+            // Préparation des détails de la commande pour WhatsApp
+            let orderDetails = cart.map(item => 
+                ` - ${item.name} (x${item.qty}): ${item.price.toFixed(2)} DH`
+            ).join('\n');
+
+            // Message WhatsApp final
+            const whatsappMessage = encodeURIComponent(
+                `*Nouvelle Commande TargetRythm*\n` +
+                `----------------------------------------\n` +
+                `*Nom/Prénom* : ${clientName}\n` +
+                `*Tél* : ${clientTel}\n` +
+                `*Adresse* : ${clientAddress}\n` +
+                `*Email (Confirmation)* : ${clientEmail}\n` +
+                `----------------------------------------\n` +
+                `*Produits* :\n${orderDetails}\n` +
+                `*Total à Payer* : ${total} DH\n\n` +
+                `Je confirme ma commande et souhaite procéder au paiement. Merci !`
+            );
+            
+            // Lien WhatsApp
+            const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessage}`;
+
+            // --- Simulation d'Envoi d'Email (Étape 4) ---
+            messageContainer.className = 'success';
+            messageContainer.style.display = 'block';
+            messageContainer.innerHTML = `
+                ✅ *Commande réussie !* Un e-mail de confirmation (simulé) a été envoyé à l'adresse *${clientEmail}*. <br>
+                Veuillez finaliser votre commande via WhatsApp.
+            `;
+            
+            // 5. Redirection vers WhatsApp (Traitement des paiements - étape 2)
+            setTimeout(() => {
+                window.location.href = whatsappUrl;
+                // Nettoyer le panier après redirection (optionnel)
+                localStorage.removeItem('targetrythm_cart');
+                cart = [];
+                updateCartCount();
+                closeCart();
+            }, 3000); // Laisse 3 secondes pour lire le message de succès
+
+        });
+
+        // Initialisation lors du chargement de la page
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCartCount();
+            checkFormValidity(); // Vérifie la validité au chargement
+        });
+    </script>
 </body>
 </html>
