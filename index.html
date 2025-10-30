@@ -3,434 +3,331 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TargetRythm - Machine de Boxe Musicale</title>
+    <title>AlphaDrop - L'Essentiel Quotidien</title>
     <style>
-        /* --- CSS Globales et Structure --- */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
-            line-height: 1.6;
-        }
-        .header {
-            background-color: #333;
-            color: white;
-            padding: 15px 20px;
-            text-align: center;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .header h1 {
-            margin: 0;
-            font-size: 1.5em;
-        }
-        .header .cart-button {
-            background-color: #d9534f;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
-        .header .cart-button:hover {
-            background-color: #c9302c;
-        }
-
-        /* --- Page Produit (Index) --- */
-        .product-page {
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 20px;
-            background: white;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            border-radius: 8px;
-        }
-        .product-detail {
-            display: flex;
-            gap: 30px;
-            flex-wrap: wrap;
-        }
-        .product-image {
-            flex: 1 1 40%;
-            text-align: center;
-        }
-        .product-image img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .product-info {
-            flex: 1 1 50%;
-        }
-        .product-info h2 {
-            color: #5cb85c;
-            margin-top: 0;
-        }
-        .product-info .price {
-            font-size: 2.5em;
-            color: #d9534f;
-            font-weight: bold;
-            margin: 15px 0;
-        }
-        .add-to-cart-btn {
-            background-color: #5cb85c;
-            color: white;
-            border: none;
-            padding: 15px 25px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1.2em;
-            font-weight: bold;
-            transition: background-color 0.3s;
-            margin-top: 20px;
-        }
-        .add-to-cart-btn:hover {
-            background-color: #449d44;
-        }
-
-        /* --- Panier (Modale/Section) --- */
-        .cart-modal {
-            display: none; /* Caché par défaut */
-            position: fixed;
-            z-index: 100;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.5);
-            padding-top: 60px;
-        }
-        .modal-content {
-            background-color: #fefefe;
-            margin: 5% auto;
-            padding: 30px;
-            border: 1px solid #888;
-            width: 90%;
-            max-width: 600px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            animation-name: animatetop;
-            animation-duration: 0.4s;
-        }
-        @keyframes animatetop {
-            from {top: -300px; opacity: 0}
-            to {top: 0; opacity: 1}
-        }
-        .close-btn {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .close-btn:hover, .close-btn:focus {
-            color: #000;
-            text-decoration: none;
-        }
-
-        /* --- Liste des Produits dans le Panier --- */
-        #cart-items {
-            list-style: none;
-            padding: 0;
-            border-bottom: 1px solid #eee;
-            margin-bottom: 20px;
-        }
-        #cart-items li {
-            padding: 10px 0;
-            border-top: 1px solid #eee;
-            display: flex;
-            justify-content: space-between;
-        }
-        .cart-total {
-            font-size: 1.5em;
-            font-weight: bold;
-            text-align: right;
-            margin-top: 10px;
-            color: #d9534f;
-        }
-
-        /* --- Formulaire de Commande --- */
-        .form-group {
-            margin-bottom: 15px;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        .form-group input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
+        /* CSS de base pour la mise en page (Même style que précédemment) */
+        body { font-family: 'Arial', sans-serif; margin: 0; padding: 0; background-color: #f4f4f9; }
+        header { background-color: #333; color: white; padding: 15px 20px; text-align: center; }
+        h1 { margin: 0; }
+        .container { max-width: 1200px; margin: 20px auto; padding: 0 20px; }
+        h2 { text-align: center; color: #333; margin-top: 40px; }
+        .product-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 30px; }
+        .product-card { background-color: white; border: 1px solid #ddd; padding: 15px; border-radius: 8px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.05); transition: transform 0.2s; }
+        .product-card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        /* Image Placeholder pour simuler une image réelle */
+        .product-card .img-placeholder { width: 100%; height: 200px; background-color: #ecf0f1; display: flex; justify-content: center; align-items: center; color: #7f8c8d; font-size: 0.9em; border-radius: 4px; margin-bottom: 10px; border: 1px dashed #bdc3c7;}
+        .product-card h3 { font-size: 1.2em; margin: 10px 0; }
+        .product-card p.price { color: #e74c3c; font-weight: bold; font-size: 1.4em; margin-bottom: 15px; }
+        .buy-btn { background-color: #2ecc71; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; text-transform: uppercase; font-weight: bold; transition: background-color 0.3s; }
+        .buy-btn:hover { background-color: #27ae60; }
         
-        /* --- Bouton WhatsApp (Paiement) --- */
-        #whatsapp-pay-btn {
-            width: 100%;
-            padding: 15px;
-            margin-top: 20px;
-            border: none;
-            border-radius: 4px;
-            color: white;
-            font-size: 1.1em;
-            font-weight: bold;
-            transition: background-color 0.3s, opacity 0.3s;
-            cursor: pointer;
+        /* Styles pour le Panier et les Étapes (Flux de commande) */
+        #cart-section, #client-info-section, #whatsapp-payment-section {
+            background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-top: 40px; border-left: 5px solid #3498db;
+            /* Ces sections seraient cachées initialement dans un vrai site */
+            display: none; 
         }
-        /* Style pour le bouton activé */
-        #whatsapp-pay-btn:not(:disabled) {
-            background-color: #5cb85c; /* Vert vif */
-        }
-        /* Style pour le bouton désactivé (par défaut) */
-        #whatsapp-pay-btn:disabled {
-            background-color: #a0d4a0; /* Vert pâle, désactivé */
-            cursor: not-allowed;
-            opacity: 0.7;
-        }
+        #cart-section.active, #client-info-section.active, #whatsapp-payment-section.active { display: block; }
+
+        .cart-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px dashed #eee; }
+        .cart-item:last-child { border-bottom: none; }
         
-        /* --- Message de Succès/Erreur --- */
-        #message-container {
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 5px;
-            display: none;
-            text-align: center;
-        }
-        .success {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-        .error {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
+        /* Styles pour le Formulaire */
+        .form-group { margin-bottom: 15px; text-align: left; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
+        .form-group input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        
+        .whatsapp-btn { background-color: #25D366; color: white; padding: 15px 30px; border: none; border-radius: 5px; font-size: 1.2em; cursor: pointer; display: inline-block; text-decoration: none; margin-top: 20px;}
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <h1>TargetRythm</h1>
-        <button class="cart-button" onclick="openCart()">
-            🛒 Panier (<span id="cart-count">0</span>)
-        </button>
-    </div>
+    <header>
+        <h1>AlphaDrop</h1>
+        <p>Achetez Futé, Vivez Mieux. Le meilleur de l'e-commerce.</p>
+    </header>
 
-    <div class="product-page">
-        <div class="product-detail">
-            <div class="product-image">
-                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEinC2FrtorGb8sePuZIr1FML8jGhtjwSoPai-wwPcp_INvbV3enSfum_GQwo-AWRWZYKXqxWuNy281SKuqTDgo3sk9dmQbo2OcG7WekCP8xLqmuSlPboXtC59-Q76KTlByGDqqUXjzA-0PmiT8x0hRcXuRubIhUdX74UyS5ojp_mFCrBodmXrs_vn3Ckrk/s1295/IMG_0659.jpeg" alt="Machine de Boxe Musicale Intelligente">
+    <div class="container">
+        <h2>🛍️ Nos 20 Produits Tendances</h2>
+        
+        <div class="product-list">
+            
+            <div class="product-card">
+                <div class="img-placeholder">Image Produit 1: Diffuseur d'Huiles Essentielles</div>
+                <h3>Diffuseur d'Huiles Essentielles USB</h3>
+                <p>Gadget pour une ambiance relaxante et purifiée.</p>
+                <p class="price">25,99€</p>
+                <button class="buy-btn" data-product-name="Diffuseur USB" data-price="25.99" onclick="goToCart(this)">Acheter</button> 
             </div>
-            <div class="product-info">
-                <h2>Machine de Boxe Musicale Intelligente</h2>
-                <p>Machine de boxe musicale pour pratique de réaction, cible murale intelligente, vitesse réglable, Compatible Bluetooth pour enfants et adultes.</p>
-                
-                <div class="price">349 DH</div>
 
-                <button class="add-to-cart-btn" onclick="addToCart({id: 1, name: 'Machine de Boxe Musicale Intelligente', price: 349.00, qty: 1})">
-                    ➕ Ajouter au Panier
-                </button>
+            <div class="product-card">
+                <div class="img-placeholder">Image Produit 2: Brosse Nettoyante Visage</div>
+                <h3>Brosse Nettoyante pour Visage Électrique</h3>
+                <p>Nettoyage en profondeur pour une peau éclatante.</p>
+                <p class="price">19,99€</p>
+                <button class="buy-btn" data-product-name="Brosse Visage Électrique" data-price="19.99" onclick="goToCart(this)">Acheter</button>
             </div>
+            
+            <div class="product-card">
+                <div class="img-placeholder">Image Produit 3: Support Téléphone Magnétique</div>
+                <h3>Support Téléphone Voiture Magnétique</h3>
+                <p>Sécurité et commodité pour votre navigation.</p>
+                <p class="price">14,99€</p>
+                <button class="buy-btn" data-product-name="Support Téléphone Voiture" data-price="14.99" onclick="goToCart(this)">Acheter</button>
+            </div>
+
+            <div class="product-card">
+                <div class="img-placeholder">Image Produit 4: Mini Projecteur Portable</div>
+                <h3>Mini Projecteur Portable HD</h3>
+                <p>Cinéma maison compact, idéal pour les soirées films.</p>
+                <p class="price">59,99€</p>
+                <button class="buy-btn" data-product-name="Mini Projecteur Portable" data-price="59.99" onclick="goToCart(this)">Acheter</button>
+            </div>
+            
+            <div class="product-card">
+                <div class="img-placeholder">Image Produit 5: Écouteurs Bluetooth</div>
+                <h3>Écouteurs sans fil Bluetooth 5.0</h3>
+                <p>Son clair et autonomie longue durée, pour le sport et le voyage.</p>
+                <p class="price">25,00€</p>
+                <button class="buy-btn" data-product-name="Écouteurs Bluetooth" data-price="25.00" onclick="goToCart(this)">Acheter</button>
+            </div>
+
+            <div class="product-card">
+                <div class="img-placeholder">Image Produit 6: Coupe-légumes Multifonction</div>
+                <h3>Coupe-légumes Multifonction 12-en-1</h3>
+                <p>Gain de temps en cuisine, pour préparer tous vos plats.</p>
+                <p class="price">22,50€</p>
+                <button class="buy-btn" data-product-name="Coupe-légumes" data-price="22.50" onclick="goToCart(this)">Acheter</button>
+            </div>
+
+            <div class="product-card">
+                <div class="img-placeholder">Image Produit 7: Kits de rangement voyage</div>
+                <h3>Kit de 6 Organisateurs de Voyage</h3>
+                <p>Maximisez l'espace dans votre valise, voyagez léger et organisé.</p>
+                <p class="price">18,99€</p>
+                <button class="buy-btn" data-product-name="Organisateurs de Voyage" data-price="18.99" onclick="goToCart(this)">Acheter</button>
+            </div>
+
+            <div class="product-card">
+                <div class="img-placeholder">Image Produit 8: Masque de sommeil en soie</div>
+                <h3>Masque de Sommeil en Soie Naturelle</h3>
+                <p>Pour un sommeil réparateur, bloque la lumière en douceur.</p>
+                <p class="price">15,00€</p>
+                <button class="buy-btn" data-product-name="Masque Sommeil Soie" data-price="15.00" onclick="goToCart(this)">Acheter</button>
+            </div>
+
+            <div class="product-card">
+                <div class="img-placeholder">Image Produit 9: Brosse Anti-Poils Réutilisable</div>
+                <h3>Brosse Anti-Poils Réutilisable pour Vêtements</h3>
+                <p>Éliminez facilement les poils d'animaux, sans gaspillage.</p>
+                <p class="price">17,50€</p>
+                <button class="buy-btn" data-product-name="Brosse Anti-Poils" data-price="17.50" onclick="goToCart(this)">Acheter</button>
+            </div>
+
+            <div class="product-card">
+                <div class="img-placeholder">Image Produit 10: Ruban LED RGB</div>
+                <h3>Ruban LED RGB Connecté (5 mètres)</h3>
+                <p>Créez l'ambiance parfaite avec des couleurs personnalisables.</p>
+                <p class="price">20,99€</p>
+                <button class="buy-btn" data-product-name="Ruban LED RGB" data-price="20.99" onclick="goToCart(this)">Acheter</button>
+            </div>
+
+            <div class="product-card">
+                <div class="img-placeholder">Image Produit 11: Stylo Blanchiment Dentaire</div>
+                <h3>Stylo de Blanchiment Dentaire Express</h3>
+                <p>Retrouvez un sourire éclatant facilement et rapidement à la maison.</p>
+                <p class="price">16,99€</p>
+                <button class="buy-btn" data-product-name="Stylo Blanchiment Dentaire" data-price="16.99" onclick="goToCart(this)">Acheter</button>
+            </div>
+
+            <div class="product-card">
+                <div class="img-placeholder">Image Produit 12: Chargeur sans fil rapide</div>
+                <h3>Chargeur sans fil Rapide à Induction</h3>
+                <p>Chargez votre téléphone sans câble, rapide et élégant.</p>
+                <p class="price">24,00€</p>
+                <button class="buy-btn" data-product-name="Chargeur sans fil" data-price="24.00" onclick="goToCart(this)">Acheter</button>
+            </div>
+
+            <div class="product-card">
+                <div class="img-placeholder">Image Produit 13: Tapis de souris Ergonomique</div>
+                <h3>Tapis de Souris Ergonomique avec Repose-poignet</h3>
+                <p>Confort maximal pour le bureau et les longues sessions de jeu.</p>
+                <p class="price">15,50€</p>
+                <button class="buy-btn" data-product-name="Tapis de Souris Ergo" data-price="15.50" onclick="goToCart(this)">Acheter</button>
+            </div>
+
+            <div class="product-card">
+                <div class="img-placeholder">Image Produit 14: Gants Exfoliants</div>
+                <h3>Gants Exfoliants Double Face (Lot de 2)</h3>
+                <p>Pour un gommage efficace et une peau douce et renouvelée.</p>
+                <p class="price">13,00€</p>
+                <button class="buy-btn" data-product-name="Gants Exfoliants" data-price="13.00" onclick="goToCart(this)">Acheter</button>
+            </div>
+
+            <div class="product-card">
+                <div class="img-placeholder">Image Produit 15: Thermomètre sans Contact</div>
+                <h3>Thermomètre Numérique Sans Contact Médical</h3>
+                <p>Prise de température rapide et hygiénique pour toute la famille.</p>
+                <p class="price">30,00€</p>
+                <button class="buy-btn" data-product-name="Thermomètre sans Contact" data-price="30.00" onclick="goToCart(this)">Acheter</button>
+            </div>
+
+            <div class="product-card">
+                <div class="img-placeholder">Image Produit 16: Kit Pinceaux Maquillage</div>
+                <h3>Kit de 12 Pinceaux de Maquillage Professionnel</h3>
+                <p>Tous les outils essentiels pour un maquillage réussi.</p>
+                <p class="price">20,99€</p>
+                <button class="buy-btn" data-product-name="Kit Pinceaux Maquillage" data-price="20.99" onclick="goToCart(this)">Acheter</button>
+            </div>
+
+            <div class="product-card">
+                <div class="img-placeholder">Image Produit 17: Organisateur de Câbles</div>
+                <h3>Organisateur de Câbles Adhésif pour Bureau (Lot de 5)</h3>
+                <p>Fini les câbles emmêlés, gardez votre espace de travail propre.</p>
+                <p class="price">14,00€</p>
+                <button class="buy-btn" data-product-name="Organisateur Câbles" data-price="14.00" onclick="goToCart(this)">Acheter</button>
+            </div>
+
+            <div class="product-card">
+                <div class="img-placeholder">Image Produit 18: Lunettes Anti-Lumière Bleue</div>
+                <h3>Lunettes Anti-Lumière Bleue (Unisexe)</h3>
+                <p>Protégez vos yeux de la fatigue numérique devant les écrans.</p>
+                <p class="price">18,50€</p>
+                <button class="buy-btn" data-product-name="Lunettes Anti-Bleue" data-price="18.50" onclick="goToCart(this)">Acheter</button>
+            </div>
+
+            <div class="product-card">
+                <div class="img-placeholder">Image Produit 19: Bouteille Isotherme</div>
+                <h3>Bouteille d'eau Isotherme en Acier Inoxydable (500 ml)</h3>
+                <p>Garde vos boissons chaudes 12h et froides 24h.</p>
+                <p class="price">21,99€</p>
+                <button class="buy-btn" data-product-name="Bouteille Isotherme" data-price="21.99" onclick="goToCart(this)">Acheter</button>
+            </div>
+
+            <div class="product-card">
+                <div class="img-placeholder">Image Produit 20: Gant de Lavage Voiture</div>
+                <h3>Gant de Lavage de Voiture en Microfibre</h3>
+                <p>Lavage sans rayure et efficace pour une voiture impeccable.</p>
+                <p class="price">13,50€</p>
+                <button class="buy-btn" data-product-name="Gant Lavage Voiture" data-price="13.50" onclick="goToCart(this)">Acheter</button>
+            </div>
+            
         </div>
-    </div>
+        
+        <hr style="margin-top: 50px;">
 
-    <div id="cartModal" class="cart-modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeCart()">&times;</span>
+        <section id="cart-section">
             <h2>🛒 Votre Panier</h2>
-            
-            <ul id="cart-items">
-                </ul>
-            
-            <div class="cart-total">Total : <span id="cart-total-price">0.00</span> DH</div>
+            <div id="cart-content">
+                <p><strong>Produit(s) ajouté(s):</strong></p>
+                <div class="cart-item">
+                    <span id="cart-product-name"></span>
+                    <span id="cart-product-price"></span>
+                </div>
+                <div class="cart-item" style="font-weight: bold; border-top: 2px solid #ccc; margin-top: 10px;">
+                    <span>Total de la commande :</span>
+                    <span id="cart-total"></span>
+                </div>
+            </div>
+            <button class="buy-btn" style="margin-top: 20px;" onclick="goToClientInfo()">Continuer la Commande</button>
+        </section>
 
-            <h3>Détails pour la Commande</h3>
-            <form id="checkoutForm">
+        <section id="client-info-section">
+            <h2>👤 Vos Coordonnées de Livraison</h2>
+            <form id="client-form">
                 <div class="form-group">
-                    <label for="client-name">Nom et Prénom :</label>
-                    <input type="text" id="client-name" required>
+                    <label for="name">Nom Complet :</label>
+                    <input type="text" id="name" name="name" required>
                 </div>
                 <div class="form-group">
-                    <label for="client-tel">Numéro de Téléphone :</label>
-                    <input type="text" id="client-tel" required value="0665290743" readonly>
+                    <label for="address">Adresse Complète :</label>
+                    <input type="text" id="address" name="address" required>
                 </div>
                 <div class="form-group">
-                    <label for="client-address">Adresse de Livraison :</label>
-                    <input type="text" id="client-address" required>
+                    <label for="phone">Numéro de Téléphone (Tél) :</label>
+                    <input type="tel" id="phone" name="phone" required>
                 </div>
                 <div class="form-group">
-                    <label for="client-email">Adresse E-Mail (Confirmation) :</label>
-                    <input type="email" id="client-email" required value="saadelhaoul0@gmail.com" readonly>
+                    <label for="email">Email (pour confirmation) :</label>
+                    <input type="email" id="email" name="email" required>
+                    <small>Un email de confirmation sera simulé à cette adresse (avec copie à saadelhaoul0@gmail.com).</small>
                 </div>
-                
-                <button type="submit" id="whatsapp-pay-btn" disabled>
-                    PASSER LA COMMANDE & PAYER VIA WHATSAPP
-                </button>
+                <button type="button" class="buy-btn" onclick="goToPaymentInstructions()">Valider mes Coordonnées et Payer</button>
             </form>
+        </section>
+
+        <section id="whatsapp-payment-section">
+            <h2>📱 Finalisation et Paiement par WhatsApp</h2>
+            <p><strong>Votre commande est réservée.</strong> Pour finaliser, veuillez cliquer sur le bouton ci-dessous pour nous envoyer un message sur WhatsApp. Indiquez votre nom et le produit commandé :</p>
             
-            <div id="message-container"></div>
-        </div>
+            <p style="font-size: 1.1em; font-weight: bold; color: #e74c3c;">Total à payer : <span id="final-total"></span></p>
+
+            <p style="font-size: 1.1em; font-weight: bold; color: #3498db;">Notre équipe vous répondra rapidement avec les instructions de paiement (virement, espèces, etc.) et confirmera la commande.</p>
+
+            <a id="whatsapp-link" href="#" target="_blank" class="whatsapp-btn">
+               Contacter pour Payer (0665290743)
+            </a>
+            
+            <p style="margin-top: 20px; font-style: italic;">Une fois le paiement confirmé, l'envoi de l'email de confirmation sera effectué.</p>
+        </section>
+
     </div>
 
     <script>
-        // --- JAVASCRIPT ---
+        let currentProduct = { name: '', price: 0 };
 
-        const WHATSAPP_NUMBER = '212665290743'; // Votre numéro WhatsApp (avec le code pays)
-        const YOUR_EMAIL = 'saadelhaoul0@gmail.com'; // Votre email pour confirmation
-
-        // Initialisation du Panier (Stockage Local)
-        let cart = JSON.parse(localStorage.getItem('targetrythm_cart')) || [];
-
-        // Fonction pour mettre à jour l'affichage du panier (icône)
-        function updateCartCount() {
-            const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
-            document.getElementById('cart-count').textContent = totalQty;
+        function hideAllSections() {
+            document.getElementById('cart-section').classList.remove('active');
+            document.getElementById('client-info-section').classList.remove('active');
+            document.getElementById('whatsapp-payment-section').classList.remove('active');
         }
 
-        // Fonction d'ajout de produit au panier
-        function addToCart(product) {
-            const existingItem = cart.find(item => item.id === product.id);
+        // 1. Clic sur "Acheter" (Met à jour le panier)
+        function goToCart(button) {
+            // Récupère les données du produit cliqué
+            currentProduct.name = button.getAttribute('data-product-name');
+            currentProduct.price = parseFloat(button.getAttribute('data-price')).toFixed(2);
+            
+            // Met à jour l'affichage du panier (simulation)
+            document.getElementById('cart-product-name').textContent = currentProduct.name + ' (x1)';
+            document.getElementById('cart-product-price').textContent = currentProduct.price + '€';
+            document.getElementById('cart-total').textContent = currentProduct.price + '€';
 
-            if (existingItem) {
-                existingItem.qty += product.qty;
+            hideAllSections();
+            document.getElementById('cart-section').classList.add('active');
+            document.getElementById('cart-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // 2. Clic sur "Continuer la Commande"
+        function goToClientInfo() {
+            hideAllSections();
+            document.getElementById('client-info-section').classList.add('active');
+            document.getElementById('client-info-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // 3. Clic sur "Valider mes Coordonnées et Payer"
+        function goToPaymentInstructions() {
+            const form = document.getElementById('client-form');
+            if (form.checkValidity()) {
+                const clientName = document.getElementById('name').value;
+                const whatsappMessage = `Bonjour, je souhaite finaliser ma commande AlphaDrop. Mon nom est ${clientName}. J'ai commandé : ${currentProduct.name} pour un total de ${currentProduct.price}€. Merci de m'envoyer les instructions de paiement.`;
+                
+                // Encode le message pour l'URL de WhatsApp
+                const encodedMessage = encodeURIComponent(whatsappMessage);
+                const whatsappURL = `https://wa.me/212665290743?text=${encodedMessage}`;
+
+                // Met à jour la section de paiement
+                document.getElementById('final-total').textContent = currentProduct.price + '€';
+                document.getElementById('whatsapp-link').setAttribute('href', whatsappURL);
+
+                hideAllSections();
+                document.getElementById('whatsapp-payment-section').classList.add('active');
+                document.getElementById('whatsapp-payment-section').scrollIntoView({ behavior: 'smooth' });
             } else {
-                cart.push(product);
+                form.reportValidity(); // Affiche les messages d'erreur HTML5
             }
-
-            localStorage.setItem('targetrythm_cart', JSON.stringify(cart));
-            updateCartCount();
-            openCart(); // Ouvre le panier après l'ajout
         }
-
-        // Fonction pour afficher le contenu du panier dans la modal
-        function renderCart() {
-            const cartList = document.getElementById('cart-items');
-            const totalElement = document.getElementById('cart-total-price');
-            cartList.innerHTML = '';
-            let total = 0;
-
-            if (cart.length === 0) {
-                cartList.innerHTML = '<li>Votre panier est vide.</li>';
-                total = 0;
-            } else {
-                cart.forEach(item => {
-                    const lineTotal = item.price * item.qty;
-                    total += lineTotal;
-                    
-                    const li = document.createElement('li');
-                    li.innerHTML = `
-                        <span>${item.name} (x${item.qty})</span>
-                        <span>${lineTotal.toFixed(2)} DH</span>
-                    `;
-                    cartList.appendChild(li);
-                });
-            }
-
-            totalElement.textContent = total.toFixed(2);
-        }
-
-        // Fonctions d'ouverture/fermeture de la modal
-        function openCart() {
-            renderCart();
-            document.getElementById('cartModal').style.display = 'block';
-        }
-
-        function closeCart() {
-            document.getElementById('cartModal').style.display = 'none';
-        }
-
-        // --- Logique du Formulaire et Paiement WhatsApp ---
-
-        const checkoutForm = document.getElementById('checkoutForm');
-        const whatsappBtn = document.getElementById('whatsapp-pay-btn');
-        const messageContainer = document.getElementById('message-container');
-        const formInputs = checkoutForm.querySelectorAll('input[required]');
-
-        // 1. Validation du formulaire pour activer le bouton
-        function checkFormValidity() {
-            let allFilled = true;
-            formInputs.forEach(input => {
-                if (input.value.trim() === '') {
-                    allFilled = false;
-                }
-            });
-            whatsappBtn.disabled = !allFilled || cart.length === 0; // Désactivé si vide ou si panier vide
-        }
-        
-        formInputs.forEach(input => {
-            input.addEventListener('input', checkFormValidity);
-        });
-
-        // 2. Gestion de la soumission du formulaire
-        checkoutForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            if (whatsappBtn.disabled) return;
-            
-            // Récupération des données client
-            const clientName = document.getElementById('client-name').value;
-            const clientTel = document.getElementById('client-tel').value;
-            const clientAddress = document.getElementById('client-address').value;
-            const clientEmail = document.getElementById('client-email').value;
-            const total = document.getElementById('cart-total-price').textContent;
-
-            // Préparation des détails de la commande pour WhatsApp
-            let orderDetails = cart.map(item => 
-                ` - ${item.name} (x${item.qty}): ${item.price.toFixed(2)} DH`
-            ).join('\n');
-
-            // Message WhatsApp final
-            const whatsappMessage = encodeURIComponent(
-                `*Nouvelle Commande TargetRythm*\n` +
-                `----------------------------------------\n` +
-                `*Nom/Prénom* : ${clientName}\n` +
-                `*Tél* : ${clientTel}\n` +
-                `*Adresse* : ${clientAddress}\n` +
-                `*Email (Confirmation)* : ${clientEmail}\n` +
-                `----------------------------------------\n` +
-                `*Produits* :\n${orderDetails}\n` +
-                `*Total à Payer* : ${total} DH\n\n` +
-                `Je confirme ma commande et souhaite procéder au paiement. Merci !`
-            );
-            
-            // Lien WhatsApp
-            const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${whatsappMessage}`;
-
-            // --- Simulation d'Envoi d'Email (Étape 4) ---
-            messageContainer.className = 'success';
-            messageContainer.style.display = 'block';
-            messageContainer.innerHTML = `
-                ✅ *Commande réussie !* Un e-mail de confirmation (simulé) a été envoyé à l'adresse *${clientEmail}*. <br>
-                Veuillez finaliser votre commande via WhatsApp.
-            `;
-            
-            // 5. Redirection vers WhatsApp (Traitement des paiements - étape 2)
-            setTimeout(() => {
-                window.location.href = whatsappUrl;
-                // Nettoyer le panier après redirection (optionnel)
-                localStorage.removeItem('targetrythm_cart');
-                cart = [];
-                updateCartCount();
-                closeCart();
-            }, 3000); // Laisse 3 secondes pour lire le message de succès
-
-        });
-
-        // Initialisation lors du chargement de la page
-        document.addEventListener('DOMContentLoaded', () => {
-            updateCartCount();
-            checkFormValidity(); // Vérifie la validité au chargement
-        });
     </script>
+
 </body>
 </html>
