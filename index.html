@@ -3,27 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AlphaDrop - L'Essentiel Quotidien</title>
+    <title>AlphaDrop | Zenith Picks - L'Essentiel Quotidien</title>
     <style>
-        /* CSS de base pour la mise en page (voir section CSS) */
+        /* ==================== STYLES GÉNÉRAUX ==================== */
         body { font-family: 'Arial', sans-serif; margin: 0; padding: 0; background-color: #f4f4f9; }
         header { background-color: #333; color: white; padding: 15px 20px; text-align: center; }
         h1 { margin: 0; }
         .container { max-width: 1200px; margin: 20px auto; padding: 0 20px; }
+        h2 { text-align: center; color: #333; margin-top: 40px; }
+
+        /* ==================== LISTE DE PRODUITS ==================== */
         .product-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 30px; }
-        .product-card { background-color: white; border: 1px solid #ddd; padding: 15px; border-radius: 8px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .product-card img { width: 100%; height: 200px; object-fit: cover; border-radius: 4px; margin-bottom: 10px; }
+        .product-card { background-color: white; border: 1px solid #ddd; padding: 15px; border-radius: 8px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.05); transition: transform 0.2s; }
+        .product-card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        
+        /* Styles pour l'image (Vraie balise IMG) */
+        .product-card img { 
+            width: 100%; 
+            height: 200px; 
+            object-fit: cover; 
+            border-radius: 4px; 
+            margin-bottom: 10px;
+            /* Style pour le placeholder tant que l'image n'est pas chargée */
+            background-color: #ecf0f1; 
+            border: 1px dashed #bdc3c7;
+        }
+
         .product-card h3 { font-size: 1.2em; margin: 10px 0; }
+        .product-card p.description { color: #555; font-size: 0.9em; min-height: 40px; }
         .product-card p.price { color: #e74c3c; font-weight: bold; font-size: 1.4em; margin-bottom: 15px; }
+        
         .buy-btn { background-color: #2ecc71; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; text-transform: uppercase; font-weight: bold; transition: background-color 0.3s; }
         .buy-btn:hover { background-color: #27ae60; }
         
-        /* Styles pour le Panier (Affiché après clic 'Acheter') */
+        /* ==================== FLUX DE COMMANDE (Panier / Formulaire) ==================== */
         #cart-section, #client-info-section, #whatsapp-payment-section {
             background-color: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-top: 40px; border-left: 5px solid #3498db;
-            /* Ces sections seraient cachées initialement dans un vrai site */
+            /* Initiallement cachées */
             display: none; 
         }
+        /* La classe 'active' est ajoutée par JavaScript pour afficher */
         #cart-section.active, #client-info-section.active, #whatsapp-payment-section.active { display: block; }
 
         .cart-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px dashed #eee; }
@@ -40,60 +59,199 @@
 <body>
 
     <header>
-        <h1>AlphaDrop</h1>
-        <p>Achetez Futé, Vivez Mieux.</p>
+        <h1>AlphaDrop / Zenith Picks</h1>
+        <p>Achetez Futé, Vivez Mieux. Le meilleur de l'e-commerce.</p>
     </header>
 
     <div class="container">
         <h2>🛍️ Nos 20 Produits Tendances</h2>
         
         <div class="product-list">
+            
             <div class="product-card">
-                <img src="[Image de Diffuseur d'Huiles Essentielles]" alt="Diffuseur USB">
+                <img src="[INSEREZ VOTRE LIEN IMAGE ICI]" alt="Diffuseur d'Huiles Essentielles">
                 <h3>Diffuseur d'Huiles Essentielles USB</h3>
-                <p>Gadget pour une ambiance relaxante et purifiée.</p>
+                <p class="description">Gadget pour une ambiance relaxante et purifiée.</p>
                 <p class="price">25,99€</p>
-                <button class="buy-btn" onclick="goToCart()">Acheter</button> 
+                <button class="buy-btn" data-product-name="Diffuseur USB" data-price="25.99" onclick="goToCart(this)">Acheter</button> 
             </div>
 
             <div class="product-card">
-                <img src="[Image de Brosse Nettoyante pour Visage]" alt="Brosse Visage">
+                <img src="[INSEREZ VOTRE LIEN IMAGE ICI]" alt="Brosse Nettoyante Visage Électrique">
                 <h3>Brosse Nettoyante pour Visage Électrique</h3>
-                <p>Nettoyage en profondeur pour une peau éclatante.</p>
+                <p class="description">Nettoyage en profondeur pour une peau éclatante.</p>
                 <p class="price">19,99€</p>
-                <button class="buy-btn" onclick="goToCart()">Acheter</button>
+                <button class="buy-btn" data-product-name="Brosse Visage Électrique" data-price="19.99" onclick="goToCart(this)">Acheter</button>
             </div>
             
             <div class="product-card">
-                <img src="[Image de Support Téléphone Voiture]" alt="Support Téléphone">
+                <img src="[INSEREZ VOTRE LIEN IMAGE ICI]" alt="Support Téléphone Voiture Magnétique">
                 <h3>Support Téléphone Voiture Magnétique</h3>
-                <p>Sécurité et commodité pour votre navigation.</p>
+                <p class="description">Sécurité et commodité pour votre navigation.</p>
                 <p class="price">14,99€</p>
-                <button class="buy-btn" onclick="goToCart()">Acheter</button>
+                <button class="buy-btn" data-product-name="Support Téléphone Voiture" data-price="14.99" onclick="goToCart(this)">Acheter</button>
             </div>
 
+            <div class="product-card">
+                <img src="[INSEREZ VOTRE LIEN IMAGE ICI]" alt="Mini Projecteur Portable HD">
+                <h3>Mini Projecteur Portable HD</h3>
+                <p class="description">Cinéma maison compact, idéal pour les soirées films.</p>
+                <p class="price">59,99€</p>
+                <button class="buy-btn" data-product-name="Mini Projecteur Portable" data-price="59.99" onclick="goToCart(this)">Acheter</button>
             </div>
+            
+            <div class="product-card">
+                <img src="[INSEREZ VOTRE LIEN IMAGE ICI]" alt="Écouteurs sans fil Bluetooth 5.0">
+                <h3>Écouteurs sans fil Bluetooth 5.0</h3>
+                <p class="description">Son clair et autonomie longue durée, pour le sport et le voyage.</p>
+                <p class="price">25,00€</p>
+                <button class="buy-btn" data-product-name="Écouteurs Bluetooth" data-price="25.00" onclick="goToCart(this)">Acheter</button>
+            </div>
+
+            <div class="product-card">
+                <img src="[INSEREZ VOTRE LIEN IMAGE ICI]" alt="Coupe-légumes Multifonction 12-en-1">
+                <h3>Coupe-légumes Multifonction 12-en-1</h3>
+                <p class="description">Gain de temps en cuisine, pour préparer tous vos plats.</p>
+                <p class="price">22,50€</p>
+                <button class="buy-btn" data-product-name="Coupe-légumes" data-price="22.50" onclick="goToCart(this)">Acheter</button>
+            </div>
+
+            <div class="product-card">
+                <img src="[INSEREZ VOTRE LIEN IMAGE ICI]" alt="Kit de 6 Organisateurs de Voyage">
+                <h3>Kit de 6 Organisateurs de Voyage</h3>
+                <p class="description">Maximisez l'espace dans votre valise, voyagez léger et organisé.</p>
+                <p class="price">18,99€</p>
+                <button class="buy-btn" data-product-name="Organisateurs de Voyage" data-price="18.99" onclick="goToCart(this)">Acheter</button>
+            </div>
+
+            <div class="product-card">
+                <img src="[INSEREZ VOTRE LIEN IMAGE ICI]" alt="Masque de Sommeil en Soie Naturelle">
+                <h3>Masque de Sommeil en Soie Naturelle</h3>
+                <p class="description">Pour un sommeil réparateur, bloque la lumière en douceur.</p>
+                <p class="price">15,00€</p>
+                <button class="buy-btn" data-product-name="Masque Sommeil Soie" data-price="15.00" onclick="goToCart(this)">Acheter</button>
+            </div>
+
+            <div class="product-card">
+                <img src="[INSEREZ VOTRE LIEN IMAGE ICI]" alt="Brosse Anti-Poils Réutilisable">
+                <h3>Brosse Anti-Poils Réutilisable pour Vêtements</h3>
+                <p class="description">Éliminez facilement les poils d'animaux, sans gaspillage.</p>
+                <p class="price">17,50€</p>
+                <button class="buy-btn" data-product-name="Brosse Anti-Poils" data-price="17.50" onclick="goToCart(this)">Acheter</button>
+            </div>
+
+            <div class="product-card">
+                <img src="[INSEREZ VOTRE LIEN IMAGE ICI]" alt="Ruban LED RGB Connecté">
+                <h3>Ruban LED RGB Connecté (5 mètres)</h3>
+                <p class="description">Créez l'ambiance parfaite avec des couleurs personnalisables.</p>
+                <p class="price">20,99€</p>
+                <button class="buy-btn" data-product-name="Ruban LED RGB" data-price="20.99" onclick="goToCart(this)">Acheter</button>
+            </div>
+
+            <div class="product-card">
+                <img src="[INSEREZ VOTRE LIEN IMAGE ICI]" alt="Stylo de Blanchiment Dentaire Express">
+                <h3>Stylo de Blanchiment Dentaire Express</h3>
+                <p class="description">Retrouvez un sourire éclatant facilement et rapidement à la maison.</p>
+                <p class="price">16,99€</p>
+                <button class="buy-btn" data-product-name="Stylo Blanchiment Dentaire" data-price="16.99" onclick="goToCart(this)">Acheter</button>
+            </div>
+
+            <div class="product-card">
+                <img src="[INSEREZ VOTRE LIEN IMAGE ICI]" alt="Chargeur sans fil Rapide à Induction">
+                <h3>Chargeur sans fil Rapide à Induction</h3>
+                <p class="description">Chargez votre téléphone sans câble, rapide et élégant.</p>
+                <p class="price">24,00€</p>
+                <button class="buy-btn" data-product-name="Chargeur sans fil" data-price="24.00" onclick="goToCart(this)">Acheter</button>
+            </div>
+
+            <div class="product-card">
+                <img src="[INSEREZ VOTRE LIEN IMAGE ICI]" alt="Tapis de Souris Ergonomique">
+                <h3>Tapis de Souris Ergonomique</h3>
+                <p class="description">Confort maximal pour le bureau et les longues sessions de jeu.</p>
+                <p class="price">15,50€</p>
+                <button class="buy-btn" data-product-name="Tapis de Souris Ergo" data-price="15.50" onclick="goToCart(this)">Acheter</button>
+            </div>
+
+            <div class="product-card">
+                <img src="[INSEREZ VOTRE LIEN IMAGE ICI]" alt="Gants Exfoliants Double Face">
+                <h3>Gants Exfoliants Double Face (Lot de 2)</h3>
+                <p class="description">Pour un gommage efficace et une peau douce et renouvelée.</p>
+                <p class="price">13,00€</p>
+                <button class="buy-btn" data-product-name="Gants Exfoliants" data-price="13.00" onclick="goToCart(this)">Acheter</button>
+            </div>
+
+            <div class="product-card">
+                <img src="[INSEREZ VOTRE LIEN IMAGE ICI]" alt="Thermomètre Numérique Sans Contact">
+                <h3>Thermomètre Numérique Sans Contact Médical</h3>
+                <p class="description">Prise de température rapide et hygiénique pour toute la famille.</p>
+                <p class="price">30,00€</p>
+                <button class="buy-btn" data-product-name="Thermomètre sans Contact" data-price="30.00" onclick="goToCart(this)">Acheter</button>
+            </div>
+
+            <div class="product-card">
+                <img src="[INSEREZ VOTRE LIEN IMAGE ICI]" alt="Kit de 12 Pinceaux de Maquillage">
+                <h3>Kit de 12 Pinceaux de Maquillage Pro</h3>
+                <p class="description">Tous les outils essentiels pour un maquillage réussi.</p>
+                <p class="price">20,99€</p>
+                <button class="buy-btn" data-product-name="Kit Pinceaux Maquillage" data-price="20.99" onclick="goToCart(this)">Acheter</button>
+            </div>
+
+            <div class="product-card">
+                <img src="[INSEREZ VOTRE LIEN IMAGE ICI]" alt="Organisateur de Câbles Adhésif">
+                <h3>Organisateur de Câbles Adhésif (Lot de 5)</h3>
+                <p class="description">Fini les câbles emmêlés, gardez votre espace de travail propre.</p>
+                <p class="price">14,00€</p>
+                <button class="buy-btn" data-product-name="Organisateur Câbles" data-price="14.00" onclick="goToCart(this)">Acheter</button>
+            </div>
+
+            <div class="product-card">
+                <img src="[INSEREZ VOTRE LIEN IMAGE ICI]" alt="Lunettes Anti-Lumière Bleue">
+                <h3>Lunettes Anti-Lumière Bleue (Unisexe)</h3>
+                <p class="description">Protégez vos yeux de la fatigue numérique devant les écrans.</p>
+                <p class="price">18,50€</p>
+                <button class="buy-btn" data-product-name="Lunettes Anti-Bleue" data-price="18.50" onclick="goToCart(this)">Acheter</button>
+            </div>
+
+            <div class="product-card">
+                <img src="[INSEREZ VOTRE LIEN IMAGE ICI]" alt="Bouteille Isotherme en Acier Inoxydable">
+                <h3>Bouteille d'eau Isotherme (500 ml)</h3>
+                <p class="description">Garde vos boissons chaudes 12h et froides 24h.</p>
+                <p class="price">21,99€</p>
+                <button class="buy-btn" data-product-name="Bouteille Isotherme" data-price="21.99" onclick="goToCart(this)">Acheter</button>
+            </div>
+
+            <div class="product-card">
+                <img src="[INSEREZ VOTRE LIEN IMAGE ICI]" alt="Gant de Lavage de Voiture en Microfibre">
+                <h3>Gant de Lavage de Voiture Microfibre</h3>
+                <p class="description">Lavage sans rayure et efficace pour une voiture impeccable.</p>
+                <p class="price">13,50€</p>
+                <button class="buy-btn" data-product-name="Gant Lavage Voiture" data-price="13.50" onclick="goToCart(this)">Acheter</button>
+            </div>
+            
+        </div>
         
         <hr style="margin-top: 50px;">
 
         <section id="cart-section">
-            <h2>🛒 Votre Panier</h2>
+            <h2>🛒 Étape 1 : Votre Panier</h2>
             <div id="cart-content">
+                <p><strong>Produit sélectionné :</strong></p>
                 <div class="cart-item">
-                    <span>Diffuseur USB (x1)</span>
-                    <span>25,99€</span>
+                    <span id="cart-product-name" style="font-weight: bold;"></span>
+                    <span id="cart-product-price" style="font-weight: bold;"></span>
                 </div>
                 <div class="cart-item" style="font-weight: bold; border-top: 2px solid #ccc; margin-top: 10px;">
-                    <span>Total :</span>
-                    <span>25,99€</span>
+                    <span>Total de la commande :</span>
+                    <span id="cart-total" style="color: #e74c3c;"></span>
                 </div>
             </div>
             <button class="buy-btn" style="margin-top: 20px;" onclick="goToClientInfo()">Continuer la Commande</button>
         </section>
 
         <section id="client-info-section">
-            <h2>👤 Vos Coordonnées de Livraison</h2>
+            <h2>👤 Étape 2 : Vos Coordonnées de Livraison</h2>
             <form id="client-form">
+                <p>Veuillez remplir ce formulaire **avant** d'aller au paiement par WhatsApp.</p>
                 <div class="form-group">
                     <label for="name">Nom Complet :</label>
                     <input type="text" id="name" name="name" required>
@@ -107,57 +265,76 @@
                     <input type="tel" id="phone" name="phone" required>
                 </div>
                 <div class="form-group">
-                    <label for="email">Email (pour confirmation : saadelhaoul0@gmail.com sera en copie) :</label>
+                    <label for="email">Email (pour confirmation) :</label>
                     <input type="email" id="email" name="email" required>
+                    <small>L'email de confirmation sera envoyé à cette adresse (copie à saadelhaoul0@gmail.com).</small>
                 </div>
-                <button type="button" class="buy-btn" onclick="goToPaymentInstructions()">Valider mes Coordonnées et Payer</button>
+                <button type="button" class="buy-btn" onclick="goToPaymentInstructions()">Valider mes Coordonnées et Passer au Paiement</button>
             </form>
         </section>
 
         <section id="whatsapp-payment-section">
-            <h2>📱 Finalisation et Paiement par WhatsApp</h2>
-            <p><strong>Votre commande est réservée.</strong> Pour finaliser, veuillez nous envoyer un message sur WhatsApp avec votre nom et le total de votre commande (25,99€ dans cet exemple).</p>
+            <h2>📱 Étape 3 : Paiement par WhatsApp</h2>
+            <p><strong>Votre commande est prête.</strong> Pour finaliser l'achat, cliquez sur le bouton WhatsApp ci-dessous. Le message sera pré-rempli avec les détails de votre commande.</p>
             
-            <p style="font-size: 1.1em; font-weight: bold; color: #3498db;">Nous vous enverrons les instructions de paiement (virement, espèces) directement sur le chat.</p>
+            <p style="font-size: 1.1em; font-weight: bold; color: #e74c3c;">Total Final à payer : <span id="final-total"></span></p>
 
-            <a href="https://wa.me/212665290743?text=Bonjour%2C%20je%20souhaite%20finaliser%20ma%20commande%20AlphaDrop.%20Mon%20nom%20est%20[Votre%20Nom]." 
-               target="_blank" class="whatsapp-btn">
-               Contacter pour Payer (0665290743)
+            <p style="font-size: 1.1em; font-weight: bold; color: #3498db;">Nous vous enverrons les instructions de paiement (virement, espèces) sur le chat WhatsApp.</p>
+
+            <a id="whatsapp-link" href="#" target="_blank" class="whatsapp-btn">
+               Contacter AlphaDrop / Zenith Picks (0665290743)
             </a>
             
-            <p style="margin-top: 20px; font-style: italic;">Une fois le paiement confirmé, vous recevrez l'email de confirmation à l'adresse que vous avez fournie (et une copie sera envoyée à saadelhaoul0@gmail.com).</p>
+            <p style="margin-top: 20px; font-style: italic;">Votre commande sera traitée dès confirmation du paiement via WhatsApp.</p>
         </section>
 
     </div>
 
     <script>
-        // Fonction pour simuler le flux de commande et l'affichage des sections.
+        let currentProduct = { name: '', price: 0 };
+
         function hideAllSections() {
             document.getElementById('cart-section').classList.remove('active');
             document.getElementById('client-info-section').classList.remove('active');
             document.getElementById('whatsapp-payment-section').classList.remove('active');
         }
 
-        // 1. Clic sur "Acheter" mène au panier
-        function goToCart() {
+        // 1. Clic sur "Acheter" (Met à jour le panier)
+        function goToCart(button) {
+            currentProduct.name = button.getAttribute('data-product-name');
+            currentProduct.price = parseFloat(button.getAttribute('data-price')).toFixed(2);
+            
+            // Met à jour l'affichage du panier
+            document.getElementById('cart-product-name').textContent = currentProduct.name + ' (x1)';
+            document.getElementById('cart-product-price').textContent = currentProduct.price + '€';
+            document.getElementById('cart-total').textContent = currentProduct.price + '€';
+
             hideAllSections();
             document.getElementById('cart-section').classList.add('active');
-            // Faites défiler la page vers le panier pour une meilleure UX
             document.getElementById('cart-section').scrollIntoView({ behavior: 'smooth' });
         }
 
-        // 2. Clic sur "Continuer la Commande" mène aux coordonnées
+        // 2. Clic sur "Continuer la Commande"
         function goToClientInfo() {
             hideAllSections();
             document.getElementById('client-info-section').classList.add('active');
             document.getElementById('client-info-section').scrollIntoView({ behavior: 'smooth' });
         }
 
-        // 3. Clic sur "Valider..." mène aux instructions de paiement
+        // 3. Clic sur "Valider mes Coordonnées et Payer"
         function goToPaymentInstructions() {
-            // Dans un vrai site, on validerait les données ici
             const form = document.getElementById('client-form');
             if (form.checkValidity()) {
+                const clientName = document.getElementById('name').value;
+                const whatsappMessage = `Bonjour, je souhaite finaliser ma commande AlphaDrop. Mon nom est ${clientName}. J'ai commandé : ${currentProduct.name} pour un total de ${currentProduct.price}€. Merci de m'envoyer les instructions de paiement.`;
+                
+                const encodedMessage = encodeURIComponent(whatsappMessage);
+                const whatsappURL = `https://wa.me/212665290743?text=${encodedMessage}`;
+
+                // Met à jour la section de paiement
+                document.getElementById('final-total').textContent = currentProduct.price + '€';
+                document.getElementById('whatsapp-link').setAttribute('href', whatsappURL);
+
                 hideAllSections();
                 document.getElementById('whatsapp-payment-section').classList.add('active');
                 document.getElementById('whatsapp-payment-section').scrollIntoView({ behavior: 'smooth' });
@@ -169,3 +346,4 @@
 
 </body>
 </html>
+
